@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using MoneyCheck.DataAcess.EntityFramework;
+
 var builder = WebApplication.CreateBuilder(args);
 
+string connection = builder.Configuration.GetConnectionString("DefaultConnectionString");
 // Add services to the container.
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connection));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
