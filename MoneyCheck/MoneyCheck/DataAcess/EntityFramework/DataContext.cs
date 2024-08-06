@@ -31,12 +31,51 @@ public partial class DataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 // Обращения к Fluent API.
-       
 
-        /* modelBuilder.Entity<User>().ToTable("Users");
-        modelBuilder.Entity<Account>().ToTable("Accounts");
-        modelBuilder.Entity<Category>().ToTable("Categories");
-        OnModelCreatingPartial(modelBuilder);*/
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.ToTable("Users", "MoneyCheck");
+            entity.HasKey(e => e.UserId);
+            entity.Property(e => e.UserName)
+                .IsRequired()
+                .HasMaxLength(15);
+            entity.Property(e => e.Balance)
+                .HasDefaultValue(0);
+            entity.HasMany(e => e.UserAccounts)
+                .WithOne(a => a.UserNavigation)
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UsersAccount_Users_UserId");
+        });
+
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity.ToTable("Categories", "MoneyCheck");
+            entity.HasIndex(e => e.AccountId, "Category_AccountId")
+                .IsUnique();
+            entity.HasMany(op => op.CategoryOperations)
+                .WithOne(c => c.Category)
+                .HasForeignKey(c => c.CategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CategoryOperations_Category_CategoryId");
+        });
+        
+        modelBuilder.Entity<Account>(entity =>
+        {
+            entity.ToTable("Accounts", "MoneyCheck");
+            entity.HasKey(e => e.AccountId);
+            entity.Property(e => e.AccountName)
+                .IsRequired()
+                .HasMaxLength(15);
+            entity.Property(e => e.AccountBalance)
+                .IsRequired()
+                .HasDefaultValue(0);
+            entity.HasOne(c => c.CategoryNavigation)
+                .WithOne(a => a.Account)
+                .HasForeignKey<Category>(c => c.AccountId);
+        });
+        
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
