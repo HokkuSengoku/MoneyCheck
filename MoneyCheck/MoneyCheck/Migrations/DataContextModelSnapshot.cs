@@ -61,9 +61,6 @@ namespace MoneyCheck.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("AccountId1")
-                        .HasColumnType("integer");
-
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -75,9 +72,6 @@ namespace MoneyCheck.Migrations
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId1")
-                        .IsUnique();
 
                     b.HasIndex(new[] { "AccountId" }, "Category_AccountId")
                         .IsUnique();
@@ -140,14 +134,10 @@ namespace MoneyCheck.Migrations
             modelBuilder.Entity("MoneyCheck.Models.Category", b =>
                 {
                     b.HasOne("MoneyCheck.Models.Account", "Account")
-                        .WithOne("CategoryNavigation")
-                        .HasForeignKey("MoneyCheck.Models.Category", "AccountId")
+                        .WithMany("AccountCategories")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("MoneyCheck.Models.Account", null)
-                        .WithOne("AccountCategories")
-                        .HasForeignKey("MoneyCheck.Models.Category", "AccountId1");
 
                     b.Navigation("Account");
                 });
@@ -165,11 +155,7 @@ namespace MoneyCheck.Migrations
 
             modelBuilder.Entity("MoneyCheck.Models.Account", b =>
                 {
-                    b.Navigation("AccountCategories")
-                        .IsRequired();
-
-                    b.Navigation("CategoryNavigation")
-                        .IsRequired();
+                    b.Navigation("AccountCategories");
                 });
 
             modelBuilder.Entity("MoneyCheck.Models.Category", b =>

@@ -7,9 +7,8 @@ public class Account
     public int Id { get; set; }
     public string AccountName { get; set; }
     public decimal AccountBalance { get; set; }
-    public Category AccountCategories { get; set; } = new Category();
+    public List<Category> AccountCategories { get; set; } = new List<Category>();
     public int UserId { get; set; }
     [ForeignKey(nameof(UserId))]
     public User UserNavigation { get; set; }
-    public Category CategoryNavigation { get; set; }
 }

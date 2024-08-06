@@ -71,9 +71,9 @@ public partial class DataContext : DbContext
             entity.Property(e => e.AccountBalance)
                 .IsRequired()
                 .HasDefaultValue(0);
-            entity.HasOne(c => c.CategoryNavigation)
+            entity.HasMany(c => c.AccountCategories)
                 .WithOne(a => a.Account)
-                .HasForeignKey<Category>(c => c.AccountId);
+                .HasForeignKey(c => c.AccountId);
         });
         
     }

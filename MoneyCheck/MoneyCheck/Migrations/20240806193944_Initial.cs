@@ -62,8 +62,7 @@ namespace MoneyCheck.Migrations
                     CategoryName = table.Column<string>(type: "text", nullable: false),
                     CategorySum = table.Column<decimal>(type: "numeric", nullable: false),
                     CategoryOperationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    AccountId = table.Column<int>(type: "integer", nullable: false),
-                    AccountId1 = table.Column<int>(type: "integer", nullable: true)
+                    AccountId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,12 +74,6 @@ namespace MoneyCheck.Migrations
                         principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Categories_Accounts_AccountId1",
-                        column: x => x.AccountId1,
-                        principalSchema: "MoneyCheck",
-                        principalTable: "Accounts",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -113,13 +106,6 @@ namespace MoneyCheck.Migrations
                 schema: "MoneyCheck",
                 table: "Categories",
                 column: "AccountId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Categories_AccountId1",
-                schema: "MoneyCheck",
-                table: "Categories",
-                column: "AccountId1",
                 unique: true);
 
             migrationBuilder.CreateIndex(
