@@ -20,14 +20,14 @@ namespace MoneyCheck.Migrations
                 schema: "MoneyCheck",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserName = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     Balance = table.Column<decimal>(type: "numeric", nullable: false, defaultValue: 0m)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,7 +35,7 @@ namespace MoneyCheck.Migrations
                 schema: "MoneyCheck",
                 columns: table => new
                 {
-                    AccountId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AccountName = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     AccountBalance = table.Column<decimal>(type: "numeric", nullable: false, defaultValue: 0m),
@@ -43,13 +43,13 @@ namespace MoneyCheck.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts", x => x.AccountId);
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UsersAccount_Users_UserId",
                         column: x => x.UserId,
                         principalSchema: "MoneyCheck",
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -57,7 +57,7 @@ namespace MoneyCheck.Migrations
                 schema: "MoneyCheck",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CategoryName = table.Column<string>(type: "text", nullable: false),
                     CategorySum = table.Column<decimal>(type: "numeric", nullable: false),
@@ -67,39 +67,39 @@ namespace MoneyCheck.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Categories_Accounts_AccountId",
                         column: x => x.AccountId,
                         principalSchema: "MoneyCheck",
                         principalTable: "Accounts",
-                        principalColumn: "AccountId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Categories_Accounts_AccountId1",
                         column: x => x.AccountId1,
                         principalSchema: "MoneyCheck",
                         principalTable: "Accounts",
-                        principalColumn: "AccountId");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Operation",
                 columns: table => new
                 {
-                    OperationId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CategoryId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Operation", x => x.OperationId);
+                    table.PrimaryKey("PK_Operation", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CategoryOperations_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalSchema: "MoneyCheck",
                         principalTable: "Categories",
-                        principalColumn: "CategoryId");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

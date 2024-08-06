@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MoneyCheck.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240806184942_Initial")]
+    [Migration("20240806191916_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace MoneyCheck.Migrations
 
             modelBuilder.Entity("MoneyCheck.Models.Account", b =>
                 {
-                    b.Property<int>("AccountId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AccountId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("AccountBalance")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace MoneyCheck.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("AccountId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -55,11 +55,11 @@ namespace MoneyCheck.Migrations
 
             modelBuilder.Entity("MoneyCheck.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AccountId")
                         .HasColumnType("integer");
@@ -77,7 +77,7 @@ namespace MoneyCheck.Migrations
                     b.Property<decimal>("CategorySum")
                         .HasColumnType("numeric");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AccountId1")
                         .IsUnique();
@@ -90,16 +90,16 @@ namespace MoneyCheck.Migrations
 
             modelBuilder.Entity("MoneyCheck.Models.Operation", b =>
                 {
-                    b.Property<int>("OperationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OperationId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.HasKey("OperationId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
@@ -108,11 +108,11 @@ namespace MoneyCheck.Migrations
 
             modelBuilder.Entity("MoneyCheck.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Balance")
                         .ValueGeneratedOnAdd()
@@ -124,7 +124,7 @@ namespace MoneyCheck.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users", "MoneyCheck");
                 });

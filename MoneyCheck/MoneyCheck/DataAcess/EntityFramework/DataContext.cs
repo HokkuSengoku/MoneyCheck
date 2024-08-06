@@ -36,7 +36,7 @@ public partial class DataContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("Users", "MoneyCheck");
-            entity.HasKey(e => e.UserId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.UserName)
                 .IsRequired()
                 .HasMaxLength(15);
@@ -64,7 +64,7 @@ public partial class DataContext : DbContext
         modelBuilder.Entity<Account>(entity =>
         {
             entity.ToTable("Accounts", "MoneyCheck");
-            entity.HasKey(e => e.AccountId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.AccountName)
                 .IsRequired()
                 .HasMaxLength(15);

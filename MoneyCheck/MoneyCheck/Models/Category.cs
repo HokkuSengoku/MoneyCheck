@@ -5,7 +5,7 @@ namespace MoneyCheck.Models;
 public class Category
 {
     public string CategoryName { get; set; }
-    public int CategoryId { get; set; }
+    public int Id { get; set; }
     public decimal CategorySum { get; set; }
     public DateTime CategoryOperationDate { get; set; }
     public List<Operation> CategoryOperations { get; set; } = new List<Operation>();
