@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
+using MoneyCheck.DataAcess.EntityFramework;
 using MoneyCheck.Models;
 
 namespace MoneyCheck.Controllers;
@@ -7,12 +9,13 @@ namespace MoneyCheck.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly DataContext _context;
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
     }
-
+    
     public IActionResult Index()
     {
         return View();
