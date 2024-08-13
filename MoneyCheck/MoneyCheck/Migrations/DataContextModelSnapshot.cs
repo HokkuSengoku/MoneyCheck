@@ -122,13 +122,13 @@ namespace MoneyCheck.Migrations
 
             modelBuilder.Entity("MoneyCheck.Models.Account", b =>
                 {
-                    b.HasOne("MoneyCheck.Models.User", "UserNavigation")
+                    b.HasOne("MoneyCheck.Models.User", "User")
                         .WithMany("UserAccounts")
                         .HasForeignKey("UserId")
                         .IsRequired()
                         .HasConstraintName("FK_UsersAccount_Users_UserId");
 
-                    b.Navigation("UserNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MoneyCheck.Models.Category", b =>

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MoneyCheck.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240812190827_Initial")]
+    [Migration("20240813185649_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -125,13 +125,13 @@ namespace MoneyCheck.Migrations
 
             modelBuilder.Entity("MoneyCheck.Models.Account", b =>
                 {
-                    b.HasOne("MoneyCheck.Models.User", "UserNavigation")
+                    b.HasOne("MoneyCheck.Models.User", "User")
                         .WithMany("UserAccounts")
                         .HasForeignKey("UserId")
                         .IsRequired()
                         .HasConstraintName("FK_UsersAccount_Users_UserId");
 
-                    b.Navigation("UserNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MoneyCheck.Models.Category", b =>

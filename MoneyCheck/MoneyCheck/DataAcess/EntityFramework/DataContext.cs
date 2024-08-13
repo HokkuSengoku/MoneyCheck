@@ -19,7 +19,7 @@ public partial class DataContext : DbContext
         } ;
         SaveChangesFailed += (sender, args) =>
         {
-// Сгенерировано исключение.
+
             Console.WriteLine($"An exception occurred! {args.Exception.Message} entities)");
         };
     }
@@ -30,8 +30,6 @@ public partial class DataContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-// Обращения к Fluent API.
-
 
         modelBuilder.Entity<User>(entity =>
         {
@@ -43,7 +41,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.Balance)
                 .HasDefaultValue(0);
             entity.HasMany(e => e.UserAccounts)
-                .WithOne(a => a.UserNavigation)
+                .WithOne(a => a.User)
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UsersAccount_Users_UserId");

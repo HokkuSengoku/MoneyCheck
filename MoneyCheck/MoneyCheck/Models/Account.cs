@@ -10,5 +10,5 @@ public class Account
     public List<Category> AccountCategories { get; set; } = new List<Category>();
     public int UserId { get; set; }
     [ForeignKey(nameof(UserId))]
-    public User UserNavigation { get; set; }
+    public User User { get; set; }
 }
