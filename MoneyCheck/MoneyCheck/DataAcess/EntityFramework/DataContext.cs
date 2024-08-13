@@ -75,7 +75,14 @@ public partial class DataContext : DbContext
                 .WithOne(a => a.Account)
                 .HasForeignKey(c => c.AccountId);
         });
+
+        modelBuilder.Entity<Operation>(entity =>
+        {
+            entity.ToTable("Operations", "MoneyCheck");
+            entity.HasKey(e => e.Id);
+        });
         
+
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
